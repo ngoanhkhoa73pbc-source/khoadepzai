@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <link rel="stylesheet" href="joke-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="joke-card">
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="fas fa-laugh"></i> Joke Generator</h1>
+                <p class="subtitle">Get a random joke every time!</p>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading joke...</p>
+            </div>
+
+            <!-- Joke Display -->
+            <div class="joke-content" id="jokeContent" style="display: none;">
+                <div class="joke-type" id="jokeType">
+                    <span class="type-badge" id="typeBadge">Single</span>
+                </div>
+                <div class="joke-text" id="jokeText">
+                    <p id="setup"></p>
+                    <p id="delivery" class="delivery-text"></p>
+                </div>
+                <div class="joke-number">
+                    <small id="jokeNumber">Joke #1</small>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div class="error-message" id="errorMessage" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <p id="errorText">Something went wrong!</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn btn-primary" id="newJokeBtn" onclick="getNewJoke()">
+                    <i class="fas fa-dice"></i> Get New Joke
+                </button>
+                <button class="btn btn-secondary" id="copyBtn" onclick="copyToClipboard()" style="display: none;">
+                    <i class="fas fa-copy"></i> Copy Joke
+                </button>
+                <button class="btn btn-secondary" id="shareBtn" onclick="shareJoke()" style="display: none;">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <label for="jokeCategory">Category:</label>
+                <select id="jokeCategory" onchange="getNewJoke()">
+                    <option value="">Any Category</option>
+                    <option value="general">General</option>
+                    <option value="programming">Programming</option>
+                    <option value="knock-knock">Knock-Knock</option>
+                </select>
+
+                <label for="jokeType">Type:</label>
+                <select id="jokeType" onchange="getNewJoke()">
+                    <option value="">Any Type</option>
+                    <option value="single">Single</option>
+                    <option value="twopart">Two-Part</option>
+                </select>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Jokes Loaded:</span>
+                    <span class="stat-value" id="jokeCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Favorites:</span>
+                    <span class="stat-value" id="favoriteCount">0</span>
+                </div>
+            </div>
+
+            <!-- Favorites -->
+            <div class="favorites-section">
+                <button class="favorites-toggle" id="favoritesToggle" onclick="toggleFavorites()">
+                    <i class="fas fa-heart"></i> My Favorites (<span id="favCount">0</span>)
+                </button>
+                <div class="favorites-list" id="favoritesList" style="display: none;">
+                    <div id="favoritesContent"></div>
+                    <button class="btn btn-small btn-danger" onclick="clearFavorites()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="joke-script.js"></script>
+</body>
+</html>
